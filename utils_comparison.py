@@ -23,7 +23,7 @@ def correlation_heatmaps(df, group_col = 'modus'):
     num_groups = len(groups)
 
     fig, axes = plt.subplots(1, num_groups, figsize = (6 * num_groups, 6))
-
+    plt.rcParams.update({'font.size': 10})
     for ax, group in zip(axes, groups):
         group_df = df[df[group_col] == group].select_dtypes(include=['number'])  # Nur numerische Spalten
         if not group_df.empty:
@@ -49,13 +49,14 @@ def scatter_plot(df, x_col, y_col,
 
 def grouped_histogram(df, x_col, x_label, group_col = 'modus'):
     plt.figure(figsize = (10, 6))
+    plt.rcParams.update({'font.size': 20})
     sns.histplot(data = df, x = x_col,
                  hue = group_col, palette = 'husl',
                  alpha = 0.6, multiple = 'dodge',
                  edgecolor = 'black', shrink = 0.8,
-                 binwidth=25)
+                 bins = 10, stat='probability')
     plt.xlabel(x_label)
-    plt.ylabel('Count')
+    plt.ylabel('Relative Probability')
     plt.show()
 
 def grouped_boxplot(df, x_col, x_label, group_col = 'modus'):
