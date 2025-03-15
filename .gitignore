@@ -1,0 +1,5 @@
+# data
+metadata.csv
+kaggle_data_search/
+kaggle_data_tags/
+__pycache__/
